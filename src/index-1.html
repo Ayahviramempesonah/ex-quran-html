@@ -86,7 +86,9 @@
             try {
                 const response = await fetch(`https://equran.id/api/v2/surat/${surahNumber}`);
                 const data = await response.json();
-                renderAyat(data.data.ayat, data.data.namaLatin);
+                console.log(data);
+               // renderAyat(data.data.ayat, data.data.namaLatin);
+                console.log(  renderAyat(data.data.ayat, data.data.namaLatin) )
                 updatePaginationButtons();
             } catch (error) {
                 console.error('Error fetching data:', error);
