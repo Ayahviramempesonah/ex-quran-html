@@ -9,6 +9,7 @@
       </style>
 </head>
 <body>
+    <h1>hello</h1>
 
     <main>
         <div id="container-surah">
@@ -18,42 +19,33 @@
 
     <script>
 
-        //mendapatkan nomor dari url
-        const params = new URLSearchParams(window.location.search)
-        const surahNumber = params.get('surah')
- async function AmbilSurah(surahNumber){
-    const container =document.getElementById('container-surah');
-    container.innerHTML='';
-
-    try{
-        //memanggik api berdasarkan nomor  surah
-        const response = await fetch('https://equran.id/api/v2/surat/${surahNumber}')
-        const data = await response.json();
-
-        // membuat element untuk menampilkan suarah
-        const surahDiv = document.createElement('div');
-        surahDiv.className = 'surah';
-        surahDiv.innerHTML = `
-        <h2> surah${data.data.surahNumber}</h2>
-        `;
-        
-        container.appendChild(surahDiv);
+const urlParams = new URLSearchParams(window.location.search);
+        const surahNumber = urlParams.get('surah');
+        const ayatNumber = urlParams.get('ayat');
 
 
+        async function fetchSurat(surahNumber) {
+            try {
+                const response = await fetch(`https://equran.id/api/v2/surat/${surahNumber}`);
+                const data = await response.json();
+                renderAyat(data.data.ayat, data.data.namaLatin);
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
 
-    } catch (error){
-        console.error('error fetching surah data',error)
-        container.innerHTML =` <p> terjadi kesalahan</p>`;
-    }
-   
-}
+        function renderAyat(ayat){
+            const container = document.getElementById('container-surah');
+            container.className = 'ayat';
+            container.innerHTML = `
+                                   <div class="teksArab">${ayat.teksArab}</div>
+                    <div class="teksLatin">${ayat.teksLatin}</div>
+                    <div class="teksIndonesia">${ayat.teksIndonesia}</div>
+            `;
+        }
 
-if (surahNumber) {
-    AmbilSurah(surahNumber);
-    
-} else {
-    document.getElementById('container-surah').innerHTML = `<p> nomor surah tidak ditemukan</p>`;
-}
+        fetchSurat(surahNumber);
 
 
     </script>
