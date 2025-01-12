@@ -30,9 +30,12 @@
            
     </main>
     <footer>
-        <p>&copy; 2024 Al-Quran Viewer. All rights reserved coderTamvan</p>
+        <p>&copy; <span id="thn">2024</span>  Al-Quran Viewer. All rights reserved coderTamvan</p>
     </footer>
     <script>
+        const tahunElement = document.getElementById('thn');
+        const tahunIni = new Date().getFullYear();
+        tahunElement.textContent = tahunIni;
         let currentSurah = 0;
 
         // Memuat data ayat dari API
