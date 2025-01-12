@@ -29,7 +29,7 @@
                 
            
     </main>
-    <footer>
+    <footer class=" bg-gray-950 p-4 m-0 text-white">
         <p>&copy; <span id="thn">2024</span>  Al-Quran Viewer. All rights reserved coderTamvan</p>
     </footer>
     <script>
@@ -56,6 +56,13 @@
             surahList.forEach(element => {
                 const surahDiv = document.createElement('div');
                 surahDiv.className = ' surah     border   grid text-white  text-center subpixel-antialiased  m-4  rounded-lg p-4 amiri-quran-regular';
+               // create loading
+               const loadingIcon = document.createElement('div');
+               loadingIcon.className = 'loading-icon';
+               loadingIcon.textContent = 'tunggu sebentar abangkuh...';
+               loadingIcon.style.display = 'none';
+             
+
                 surahDiv.innerHTML = `
                    <h2>${element.nomor}. ${element.namaLatin} (${element.nama})</h2>
                     <p>Jumlah Ayat: ${element.jumlahAyat}</p>
@@ -64,6 +71,21 @@
                     
                       <audio  class="  rounded p-0"   controls   preload="auto" src="${element.audioFull['04']}"></audio>
                 `;
+
+
+                //logic loading
+                const audio = surahDiv.querySelector('audio');
+                audio.addEventListener('loadstart',() => {
+                    loadingIcon.style.display = 'block';
+                  });
+
+                audio.addEventListener('canplay', () => {
+                    loadingIcon.style.display = 'none';
+                });
+
+                // masukkan audio dsinii
+                surahDiv.appendChild(loadingIcon);
+
                 surahDiv.onclick = () => {
                     window.location.href =`ayat.html?surah=${element.nomor}   `
                 }
@@ -92,10 +114,7 @@
         }
        
         LogicData();
-        // add onlick function
-       
-//  fetchSurah();
-       
+            
     </script>
 </body>
 </html>
