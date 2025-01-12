@@ -27,8 +27,7 @@
             <h1>Al-Quran</h1>
             <div id="surah-container" >
                 
-            </div>
-                   </div>
+           
     </main>
     <footer>
         <p>&copy; 2024 Al-Quran Viewer. All rights reserved coderTamvan</p>
@@ -53,7 +52,7 @@
         // Menampilkan ayat di halaman
         function renderSurahList(surahList) {
             const container = document.getElementById('surah-container');
-            container.innerHTML='';
+            // container.innerHTML='';
             surahList.forEach(element => {
                 const surahDiv = document.createElement('div');
                 surahDiv.className = ' surah     border   grid text-white  text-center subpixel-antialiased  m-4  rounded-lg p-4 amiri-quran-regular';

@@ -50,9 +50,12 @@ line-height: 1.75rem; /* 28px */
             try {
                 const response = await fetch(`https://equran.id/api/v2/surat/${surahNumber}`);
                 const data = await response.json();
-                console.log('ini data yang di dapat',data.data);
                 renderAyat(data.data.ayat);
-         console.log('ini data renderAyat():',renderAyat(data.data.ayat));
+                // console.log('ini data renderAyat():',renderAyat(data.data.ayat));
+
+                // console.log('ini data yang di dapat',data.data);
+                // renderAyat(data.data.ayat);
+        //   console.log('ini data renderAyat():',renderAyat(data.data.ayat));
             } catch (error) {
                 console.error('Error fetching data:', error);
                 return null;
@@ -60,13 +63,13 @@ line-height: 1.75rem; /* 28px */
         }
 
         fetchAyat();
-        console.log('ini data fetchAyat():',fetchAyat());
+        
     
 
          function renderAyat(ayatList) {
              const container = document.getElementById('container-ayat');
             
-            ayatList.forEach(element => {
+            ayatList.map(element => {
                 const ayatDiv = document.createElement('div');
                 ayatDiv.className = '  border   grid text-white     m-4  rounded-lg p-4 amiri-quran-regular';
                 ayatDiv.innerHTML=`
@@ -79,8 +82,10 @@ line-height: 1.75rem; /* 28px */
                 container.appendChild(ayatDiv);
             });
          }
-         renderAyat();
-         console.log('ini data renderAyat():',renderAyat());
+        //  console.log('ini data renderAyat():',renderAyat(data.data.ayat));
+
+        //  renderAyat();
+        //  console.log('ini data renderAyat():',renderAyat());
 
 
 
