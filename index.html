@@ -59,7 +59,7 @@
                     <p>Arti: ${element.arti}</p>
                     <p>Tempat Turun: ${element.tempatTurun}</p>
                     
-                      <audio  class="  rounded p-0"   controls   src="${element.audioFull['04']}"></audio>
+                      <audio  class="  rounded p-0"   controls   preload="auto" src="${element.audioFull['04']}"></audio>
                 `;
                 surahDiv.onclick = () => {
                     window.location.href =`ayat.html?surah=${element.nomor}   `
