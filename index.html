@@ -19,12 +19,12 @@
         </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al-Quran Viewer</title>
+    <title>Al-Quran </title>
 </head>
 <body>
     <main   class="bg-slate-500   text-lg"> 
         <div class="container     "  >
-            <h1>Al-Quran</h1>
+            <h1  class="text-center text-lg font-bold  " >Al-Quran</h1>
             <div id="surah-container" >
                 
            
@@ -46,13 +46,10 @@
                 return null;
             }
         }
-
-        // renderSurahList(data.data);
-
         // Menampilkan ayat di halaman
         function renderSurahList(surahList) {
             const container = document.getElementById('surah-container');
-            // container.innerHTML='';
+             container.innerHTML='';
             surahList.forEach(element => {
                 const surahDiv = document.createElement('div');
                 surahDiv.className = ' surah     border   grid text-white  text-center subpixel-antialiased  m-4  rounded-lg p-4 amiri-quran-regular';
@@ -61,7 +58,8 @@
                     <p>Jumlah Ayat: ${element.jumlahAyat}</p>
                     <p>Arti: ${element.arti}</p>
                     <p>Tempat Turun: ${element.tempatTurun}</p>
-                      <audio controls   src="${element.audioFull['04']}"></audio>
+                    
+                      <audio  class="  rounded p-0"   controls   src="${element.audioFull['04']}"></audio>
                 `;
                 surahDiv.onclick = () => {
                     window.location.href =`ayat.html?surah=${element.nomor}   `
