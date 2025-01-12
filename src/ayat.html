@@ -1,69 +1,90 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./output.css" rel="stylesheet">
-  <style>
-      @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Naskh+Arabic:wght@400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-      </style>
-</head>
-<body>
-    <h1>hello</h1>
 
-    <main>
-        <div id="container-surah">
+<head>
+    <link href="./output.css" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Naskh+Arabic:wght@400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+        
+        * {
+            .amiri-quran-regular {
+  font-family: "Amiri Quran", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+        }
+        #h1{
+            text-align: right; 
+    direction: rtl;
+    unicode-bidi: embed; 
+    font-size: 1.25rem; /* 20px */
+line-height: 1.75rem; /* 28px */
+        }
+      
+        
+        </style>
+</head>
+
+<body>
+
+    <main   class="bg-slate-500   text-lg">
+        <div id="container-ayat">
 
         </div>
     </main>
 
     <script>
 
-const urlParams = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(window.location.search);
         let surahNumber = urlParams.get('surah');
         let ayatNumber = urlParams.get('ayat');
 
 
-        async function fetchSurat() {
+        async function fetchAyat() {
             try {
                 const response = await fetch(`https://equran.id/api/v2/surat/${surahNumber}`);
                 const data = await response.json();
-                console.log(data.data.nomor,
-                data.data.nama);
-                console.log(data.nama);
-                
-                //cek data
-        
-
+                console.log('ini data yang di dapat',data.data);
                 renderAyat(data.data.ayat);
-            
-            
-            
-
-                //renderAyat(data);
-                console.log(renderAyat(data));
-                
+         console.log('ini data renderAyat():',renderAyat(data.data.ayat));
             } catch (error) {
                 console.error('Error fetching data:', error);
+                return null;
             }
         }
 
-        function renderAyat(ayat,namaSurat){
-            const container = document.getElementById('container-surah');
-            container.className = 'ayat';
-            container.innerHTML = `
-            <h2> ${namaSurat}</h2>
-                 <div class="teksArab"> teksArab${data.data.nama}</div>
-                     <div class="teksLatin"></div>
-                     <div class="teksIndonesia"></div>
-            `;
-        }
+        fetchAyat();
+        console.log('ini data fetchAyat():',fetchAyat());
+    
 
-        fetchSurat(surahNumber);
-        console.log( fetchSurat(surahNumber) );
+         function renderAyat(ayatList) {
+             const container = document.getElementById('container-ayat');
+            
+            ayatList.forEach(element => {
+                const ayatDiv = document.createElement('div');
+                ayatDiv.className = '  border   grid text-white     m-4  rounded-lg p-4 amiri-quran-regular';
+                ayatDiv.innerHTML=`
+                <h2>${element.nomorAyat}</h2>
+                <h1 id='h1' class='text-right  font-semibold p-2 amiri-quran-regular    text-lg font-bold'>${element.teksArab}</h1>
+                <p>${element.teksIndonesia}</p>
+                
+                
+                `;
+                container.appendChild(ayatDiv);
+            });
+         }
+         renderAyat();
+         console.log('ini data renderAyat():',renderAyat());
+
 
 
     </script>
- 
+
 </body>
+
 </html>
