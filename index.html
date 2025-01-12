@@ -74,17 +74,17 @@
 
 
                 //logic loading
-                const audio = surahDiv.querySelector('audio');
-                audio.addEventListener('loadstart',() => {
-                    loadingIcon.style.display = 'block';
-                  });
+                // const audio = surahDiv.querySelector('audio');
+                // audio.addEventListener('loadstart',() => {
+                //     loadingIcon.style.display = 'block';
+                //   });
 
-                audio.addEventListener('canplay', () => {
-                    loadingIcon.style.display = 'none';
-                });
+                // audio.addEventListener('canplay', () => {
+                //     loadingIcon.style.display = 'none';
+                // });
 
                 // masukkan audio dsinii
-                surahDiv.appendChild(loadingIcon);
+                // surahDiv.appendChild(loadingIcon);
 
                 surahDiv.onclick = () => {
                     window.location.href =`ayat.html?surah=${element.nomor}   `
